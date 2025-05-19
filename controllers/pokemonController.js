@@ -1,7 +1,7 @@
 const {Pokemon} = require('../models')
 const types = ['Grass', 'fire', 'Water', 'Fairy', 'Ice', 'Bug', 'Dragon'
     , 'Ghost', 'Poison', 'Dark', 'Rock', 'Electric',
-    'Ground', 'Steel', 'Normal', 'Fighting', 'Flying', 'Stellar', 'Physic'];
+    'Ground', 'Steel', 'Normal', 'Fighting', 'Flying', 'Stellar', 'Psychic'];
 module.exports.viewAll = async function(req, res, next) {
     let searchTypes = ['All'];
     for(i=0; i<types.length; i++){
@@ -80,4 +80,18 @@ module.exports.renderAddForm = function(req, res) {
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
+}
+
+module.exports.addPokemon = async function(req, res) {
+    await Pokemon.create({
+            name: req.body.name,
+            health: req.body.health,
+            image: req.body.image,
+            type: req.body.type,
+            attackone: req.body.attackone,
+            attacktwo: req.body.attacktwo,
+            attackonecost: req.body.attackonecost,
+            attacktwocost: req.body.attacktwocost,
+        })
+    res.redirect('/');
 }
